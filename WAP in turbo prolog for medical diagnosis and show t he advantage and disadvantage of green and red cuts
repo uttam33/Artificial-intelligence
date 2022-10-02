@@ -1,0 +1,49 @@
+Domains: 
+disease,indication=symbol 
+name-string
+Predicates: 
+hypothesis(name,disease) 
+symptom(name,indication) 
+response(char)
+go 
+goonce
+clauses 
+go:-
+goonce
+write("will you like to try again (y/n)?"), 
+response(Reply),
+Reply='n'. 
+go. 
+goonce:-
+write("what is the patient's name"),nl, 
+readln(Patient), 
+hypothesis(Patient,Disease),!, 
+write(Patient,"probably has",Disease),!, 
+goonce:-
+write("sorry, i am not ina position to diagnose"), 
+write("the disease").
+symptom(Patient,fever):-
+write("does",Patient,"has a fever (y/n)?"),nl, 
+response(Reply),
+Reply='y',nl. 
+symptom(Patient,rash):-
+write ("does", Patient,"has a rash (y/n)?" ),nl, 
+response(Reply),
+Reply='y', 
+symptom(Patient_body,ache):-
+write("does",Patient,"has a body ache (y/n)?"),nl, 
+response(Reply).
+Reply='y',nl. 
+symptom(Patient,runny_nose):-
+write("does",Patient,"has a runny_nose (y/n)?"), 
+response(Reply),
+Reply='y' 
+hypothesis(Patient,flu):-
+symptom(Patient,fever), 
+symptom(Patient,body_ache),
+hypothesis(Patient,common_cold):-
+symptom(Patient,body_ache), 
+Symptom(Patient,runny_nose). 
+response(Reply):-
+readchar(Reply), 
+write(Reply).
